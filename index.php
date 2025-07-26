@@ -1,1 +1,1 @@
-<!-- index.php placeholder -->
+<!-- dashboard/index.php placeholder -->
