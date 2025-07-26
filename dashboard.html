@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Recyclable Items Marketplace</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-container">
+      <a href="/" class="logo">
+        <i class="fas fa-recycle"></i>
+        EcoMarket
+      </a>
+      
+      <button class="mobile-menu-btn" id="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+      </button>
+      
+      <ul class="nav-menu" id="nav-menu">
+        <li class="nav-item">
+          <a href="/" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="/pages/buy-items.html" class="nav-link">Browse Items</a>
+        </li>
+        <li class="nav-item" id="user-dropdown">
+          <a href="#" class="nav-link">
+            <i class="fas fa-user"></i>
+            <span id="user-name">User</span>
+          </a>
+        </li>
+        <li class="nav-item" id="logout-btn">
+          <a href="#" class="nav-link" onclick="window.auth.logout(); return false;">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <ul class="sidebar-menu">
+      <li class="sidebar-item">
+        <a href="/pages/dashboard.html" class="sidebar-link active">
+          <i class="fas fa-tachometer-alt"></i> Dashboard
+        </a>
+      </li>
+      <li class="sidebar-item">
+        <a href="/pages/buy-items.html" class="sidebar-link">
+          <i class="fas fa-shopping-cart"></i> Browse Items
+        </a>
+      </li>
+      <li class="sidebar-item">
+        <a href="/pages/sell-item.html" class="sidebar-link">
+          <i class="fas fa-tag"></i> Sell an Item
+        </a>
+      </li>
+      <li class="sidebar-item">
+        <a href="/pages/my-listings.html" class="sidebar-link">
+          <i class="fas fa-list"></i> My Listings
+        </a>
+      </li>
+      <li class="sidebar-item">
+        <a href="/pages/my-bids.html" class="sidebar-link">
+          <i class="fas fa-gavel"></i> My Bids
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Sidebar Overlay -->
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <!-- Main Content -->
+  <main class="dashboard-content" id="dashboard-content">
+    <div class="container">
+      <h1>Dashboard</h1>
+      <p>Welcome to your EcoMarket dashboard, <span id="welcome-name">User</span>!</p>
+      
+      <div id="alert-container"></div>
+      
+      <!-- Dashboard Stats -->
+      <div class="grid" style="margin-top: 2rem;">
+        <!-- Active Listings -->
+        <div class="card">
+          <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+            <div style="font-size: 2rem; color: var(--primary-color); margin-right: 1rem;">
+              <i class="fas fa-list"></i>
+            </div>
+            <div>
+              <h3 style="margin-bottom: 0.25rem;">My Listings</h3>
+              <p style="margin: 0;">Items you're selling</p>
+            </div>
+          </div>
+          <div style="font-size: 2rem; font-weight: bold; margin-bottom: 1rem;" id="listings-count">0</div>
+          <a href="/pages/my-listings.html" class="btn w-100">View Listings</a>
+        </div>
+        
+        <!-- Active Bids -->
+        <div class="card">
+          <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+            <div style="font-size: 2rem; color: var(--accent-color); margin-right: 1rem;">
+              <i class="fas fa-gavel"></i>
+            </div>
+            <div>
+              <h3 style="margin-bottom: 0.25rem;">My Bids</h3>
+              <p style="margin: 0;">Items you're bidding on</p>
+            </div>
+          </div>
+          <div style="font-size: 2rem; font-weight: bold; margin-bottom: 1rem;" id="bids-count">0</div>
+          <a href="/pages/my-bids.html" class="btn w-100">View Bids</a>
+        </div>
+        
+        <!-- Sell Item -->
+        <div class="card">
+          <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+            <div style="font-size: 2rem; color: var(--success-color); margin-right: 1rem;">
+              <i class="fas fa-tag"></i>
+            </div>
+            <div>
+              <h3 style="margin-bottom: 0.25rem;">Sell an Item</h3>
+              <p style="margin: 0;">List a recyclable item for sale</p>
+            </div>
+          </div>
+          <p style="margin-bottom: 1rem;">Create a new listing and start receiving bids.</p>
+          <a href="/pages/sell-item.html" class="btn w-100">Create Listing</a>
+        </div>
+        
+        <!-- Browse Items -->
+        <div class="card">
+          <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+            <div style="font-size: 2rem; color: var(--info-color); margin-right: 1rem;">
+              <i class="fas fa-shopping-cart"></i>
+            </div>
+            <div>
+              <h3 style="margin-bottom: 0.25rem;">Browse Items</h3>
+              <p style="margin: 0;">Find recyclable items to buy</p>
+            </div>
+          </div>
+          <p style="margin-bottom: 1rem;">Explore available items and place bids.</p>
+          <a href="/pages/buy-items.html" class="btn w-100">Browse Now</a>
+        </div>
+      </div>
+      
+      <!-- Recent Activity -->
+      <h2 style="margin-top: 3rem;">Recent Activity</h2>
+      <div class="card" id="recent-activity">
+        <div id="activity-loader" class="loader-container">
+          <div class="loader"></div>
+        </div>
+        <div id="activity-content" style="display: none;">
+          <!-- Activity content will be loaded here -->
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-container">
+      <div class="footer-section">
+        <h3>EcoMarket</h3>
+        <p>Buy and sell recyclable items to reduce waste and make money.</p>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul class="footer-links">
+          <li class="footer-link"><a href="/">Home</a></li>
+          <li class="footer-link"><a href="/pages/buy-items.html">Browse Items</a></li>
+          <li class="footer-link"><a href="/pages/sell-item.html">Sell an Item</a></li>
+          <li class="footer-link"><a href="/pages/my-listings.html">My Listings</a></li>
+          <li class="footer-link"><a href="/pages/my-bids.html">My Bids</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Contact Us</h3>
+        <ul class="footer-links">
+          <li class="footer-link"><a href="mailto:info@ecomarket.com">info@ecomarket.com</a></li>
+          <li class="footer-link"><a href="tel:+1234567890">+1 (234) 567-890</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2023 EcoMarket. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="/assets/js/auth.js"></script>
+  <script src="/assets/js/api.js"></script>
+  <script src="/assets/js/utils.js"></script>
+  <script>
+    // Check if user is logged in
+    window.auth.checkAuth(true);
+    
+    // Get user data
+    const user = window.auth.getUser();
+    
+    // Update UI with user data
+    document.getElementById('user-name').textContent = user.username;
+    document.getElementById('welcome-name').textContent = user.full_name || user.username;
+    
+    // Mobile menu toggle
+    document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+      document.getElementById('nav-menu').classList.toggle('active');
+    });
+    
+    // Sidebar toggle for mobile
+    document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+      document.getElementById('sidebar').classList.toggle('active');
+      document.getElementById('sidebar-overlay').classList.toggle('active');
+    });
+    
+    // Close sidebar when clicking overlay
+    document.getElementById('sidebar-overlay').addEventListener('click', function() {
+      document.getElementById('sidebar').classList.remove('active');
+      document.getElementById('sidebar-overlay').classList.remove('active');
+    });
+    
+    // Load dashboard data
+    async function loadDashboardData() {
+      try {
+        // Get user's items
+        const items = await window.api.item.getUserItems(user.user_id);
+        document.getElementById('listings-count').textContent = items.length;
+        
+        // Get user's bids
+        const bids = await window.api.bid.getUserBids(user.user_id);
+        document.getElementById('bids-count').textContent = bids.length;
+        
+        // Load recent activity
+        await loadRecentActivity(items, bids);
+      } catch (error) {
+        console.error('Error loading dashboard data:', error);
+        window.utils.showAlert('Error loading dashboard data. Please try again.', 'danger', '#alert-container');
+      }
+    }
+    
+    // Load recent activity
+    async function loadRecentActivity(items, bids) {
+      const activityLoader = document.getElementById('activity-loader');
+      const activityContent = document.getElementById('activity-content');
+      
+      try {
+        // Combine items and bids for activity feed
+        const activities = [];
+        
+        // Add items to activities
+        items.forEach(item => {
+          activities.push({
+            type: 'item',
+            data: item,
+            date: new Date(item.created_at)
+          });
+        });
+        
+        // Add bids to activities
+        bids.forEach(bid => {
+          activities.push({
+            type: 'bid',
+            data: bid,
+            date: new Date(bid.created_at)
+          });
+        });
+        
+        // Sort activities by date (newest first)
+        activities.sort((a, b) => b.date - a.date);
+        
+        // Limit to 5 most recent activities
+        const recentActivities = activities.slice(0, 5);
+        
+        // Generate HTML for activities
+        if (recentActivities.length === 0) {
+          activityContent.innerHTML = `
+            <div class="text-center" style="padding: 2rem;">
+              <p>No recent activity found.</p>
+              <p>Start by browsing items or creating a listing!</p>
+            </div>
+          `;
+        } else {
+          let html = '<ul style="list-style: none; padding: 0;">';
+          
+          for (const activity of recentActivities) {
+            if (activity.type === 'item') {
+              const item = activity.data;
+              html += `
+                <li style="padding: 1rem; border-bottom: 1px solid #eee;">
+                  <div style="display: flex; align-items: center;">
+                    <div style="font-size: 1.5rem; color: var(--primary-color); margin-right: 1rem;">
+                      <i class="fas fa-tag"></i>
+                    </div>
+                    <div>
+                      <p style="margin: 0; font-weight: 500;">You listed "${item.name}" for sale</p>
+                      <p style="margin: 0; color: var(--text-secondary); font-size: 0.875rem;">
+                        ${window.utils.formatDateTime(item.created_at)}
+                      </p>
+                    </div>
+                    <div style="margin-left: auto;">
+                      <a href="/pages/item-detail.html?id=${item.item_id}" class="btn btn-sm">View</a>
+                    </div>
+                  </div>
+                </li>
+              `;
+            } else if (activity.type === 'bid') {
+              const bid = activity.data;
+              html += `
+                <li style="padding: 1rem; border-bottom: 1px solid #eee;">
+                  <div style="display: flex; align-items: center;">
+                    <div style="font-size: 1.5rem; color: var(--accent-color); margin-right: 1rem;">
+                      <i class="fas fa-gavel"></i>
+                    </div>
+                    <div>
+                      <p style="margin: 0; font-weight: 500;">You placed a bid of ${window.utils.formatCurrency(bid.bid_amount)}</p>
+                      <p style="margin: 0; color: var(--text-secondary); font-size: 0.875rem;">
+                        ${window.utils.formatDateTime(bid.created_at)}
+                      </p>
+                    </div>
+                    <div style="margin-left: auto;">
+                      <a href="/pages/item-detail.html?id=${bid.item_id}" class="btn btn-sm">View</a>
+                    </div>
+                  </div>
+                </li>
+              `;
+            }
+          }
+          
+          html += '</ul>';
+          activityContent.innerHTML = html;
+        }
+      } catch (error) {
+        console.error('Error loading recent activity:', error);
+        activityContent.innerHTML = `
+          <div class="alert alert-danger">
+            Error loading recent activity. Please try again.
+          </div>
+        `;
+      } finally {
+        activityLoader.style.display = 'none';
+        activityContent.style.display = 'block';
+      }
+    }
+    
+    // Load dashboard data on page load
+    loadDashboardData();
+  </script>
+</body>
+</html>

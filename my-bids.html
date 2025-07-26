@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Bids - Recyclable Items Marketplace</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-container">
+      <a href="/" class="logo">
+        <i class="fas fa-recycle"></i>
+        EcoMarket
+      </a>
+      
+      <button class="mobile-menu-btn" id="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+      </button>
+      
+      <ul class="nav-menu" id="nav-menu">
+        <li class="nav-item">
+          <a href="/" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="/pages/buy-items.html" class="nav-link">Browse Items</a>
+        </li>
+        <li class="nav-item" id="user-dropdown">
+          <a href="#" class="nav-link">
+            <i class="fas fa-user"></i>
+            <span id="user-name">User</span>
+          </a>
+        </li>
+        <li class="nav-item" id="logout-btn">
+          <a href="#" class="nav-link" onclick="window.auth.logout(); return false;">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <ul class="sidebar-menu">
+      <li class="sidebar-item">
+        <a href="/pages/dashboard.html" class="sidebar-link">
+          <i class="fas fa-tachometer-alt"></i> Dashboard
+        </a>
+      </li>
+      <li class="sidebar-item">
+        <a href="/pages/buy-items.html" class="sidebar-link">
+          <i class="fas fa-shopping-cart"></i> Browse Items
+        </a>
+      </li>
+      <li class="sidebar-item">
+        <a href="/pages/sell-item.html" class="sidebar-link">
+          <i class="fas fa-tag"></i> Sell an Item
+        </a>
+      </li>
+      <li class="sidebar-item">
+        <a href="/pages/my-listings.html" class="sidebar-link">
+          <i class="fas fa-list"></i> My Listings
+        </a>
+      </li>
+      <li class="sidebar-item">
+        <a href="/pages/my-bids.html" class="sidebar-link active">
+          <i class="fas fa-gavel"></i> My Bids
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Sidebar Overlay -->
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <!-- Main Content -->
+  <main class="dashboard-content" id="dashboard-content">
+    <div class="container">
+      <h1>My Bids</h1>
+      <p>Track your bids on recyclable items</p>
+      
+      <div id="alert-container"></div>
+      
+      <!-- Filters -->
+      <div style="display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap;">
+        <div style="flex: 1; min-width: 200px;">
+          <input type="text" id="search-input" class="form-control" placeholder="Search your bids...">
+        </div>
+        
+        <div style="width: 200px;">
+          <select id="sort-filter" class="form-control">
+            <option value="newest">Newest First</option>
+            <option value="oldest">Oldest First</option>
+            <option value="amount_low">Amount: Low to High</option>
+            <option value="amount_high">Amount: High to Low</option>
+          </select>
+        </div>
+      </div>
+      
+      <!-- Browse Items Button -->
+      <div style="margin-bottom: 2rem;">
+        <a href="/pages/buy-items.html" class="btn">
+          <i class="fas fa-shopping-cart"></i> Browse Items to Bid
+        </a>
+      </div>
+      
+      <!-- Bids Table -->
+      <div id="bids-container">
+        <div id="loader" class="loader-container">
+          <div class="loader"></div>
+        </div>
+        
+        <div id="bids-table-container" style="display: none;">
+          <div class="card">
+            <table id="bids-table" style="width: 100%; border-collapse: collapse;">
+              <thead>
+                <tr style="border-bottom: 1px solid #eee;">
+                  <th style="text-align: left; padding: 0.75rem;">Item</th>
+                  <th style="text-align: right; padding: 0.75rem;">Your Bid</th>
+                  <th style="text-align: right; padding: 0.75rem;">Date</th>
+                  <th style="text-align: right; padding: 0.75rem;">Status</th>
+                  <th style="text-align: right; padding: 0.75rem;">Action</th>
+                </tr>
+              </thead>
+              <tbody id="bids-table-body">
+                <!-- Bids will be loaded here -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
+        <div id="no-bids" class="text-center" style="display: none; padding: 3rem;">
+          <div class="card">
+            <h3>No bids found</h3>
+            <p>You haven't placed any bids yet.</p>
+            <a href="/pages/buy-items.html" class="btn">Browse Items to Bid</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-container">
+      <div class="footer-section">
+        <h3>EcoMarket</h3>
+        <p>Buy and sell recyclable items to reduce waste and make money.</p>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul class="footer-links">
+          <li class="footer-link"><a href="/">Home</a></li>
+          <li class="footer-link"><a href="/pages/buy-items.html">Browse Items</a></li>
+          <li class="footer-link"><a href="/pages/sell-item.html">Sell an Item</a></li>
+          <li class="footer-link"><a href="/pages/my-listings.html">My Listings</a></li>
+          <li class="footer-link"><a href="/pages/my-bids.html">My Bids</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Contact Us</h3>
+        <ul class="footer-links">
+          <li class="footer-link"><a href="mailto:info@ecomarket.com">info@ecomarket.com</a></li>
+          <li class="footer-link"><a href="tel:+1234567890">+1 (234) 567-890</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2023 EcoMarket. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="/assets/js/auth.js"></script>
+  <script src="/assets/js/api.js"></script>
+  <script src="/assets/js/utils.js"></script>
+  <script>
+    // Check if user is logged in
+    window.auth.checkAuth(true);
+    
+    // Get user data
+    const user = window.auth.getUser();
+    
+    // Update UI with user data
+    document.getElementById('user-name').textContent = user.username;
+    
+    // Mobile menu toggle
+    document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+      document.getElementById('nav-menu').classList.toggle('active');
+    });
+    
+    // Sidebar toggle for mobile
+    document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+      document.getElementById('sidebar').classList.toggle('active');
+      document.getElementById('sidebar-overlay').classList.toggle('active');
+    });
+    
+    // Close sidebar when clicking overlay
+    document.getElementById('sidebar-overlay').addEventListener('click', function() {
+      document.getElementById('sidebar').classList.remove('active');
+      document.getElementById('sidebar-overlay').classList.remove('active');
+    });
+    
+    // Variables
+    let allBids = [];
+    let filteredBids = [];
+    let itemDetails = {};
+    
+    // Load bids
+    async function loadBids() {
+      const loader = document.getElementById('loader');
+      const bidsTableContainer = document.getElementById('bids-table-container');
+      const noBids = document.getElementById('no-bids');
+      
+      try {
+        // Show loader
+        loader.style.display = 'flex';
+        bidsTableContainer.style.display = 'none';
+        noBids.style.display = 'none';
+        
+        // Get user's bids
+        allBids = await window.api.bid.getUserBids(user.user_id);
+        
+        // Get item details for each bid
+        for (const bid of allBids) {
+          try {
+            const item = await window.api.item.getItemById(bid.item_id);
+            itemDetails[bid.item_id] = item;
+          } catch (error) {
+            console.error(`Error fetching item ${bid.item_id}:`, error);
+            itemDetails[bid.item_id] = null;
+          }
+        }
+        
+        // Apply filters
+        applyFilters();
+      } catch (error) {
+        console.error('Error loading bids:', error);
+        window.utils.showAlert(error.message || 'Failed to load your bids. Please try again.', 'danger', '#alert-container');
+        
+        // Hide loader
+        loader.style.display = 'none';
+      }
+    }
+    
+    // Apply filters
+    function applyFilters() {
+      const searchTerm = document.getElementById('search-input').value.toLowerCase();
+      const sortFilter = document.getElementById('sort-filter').value;
+      
+      // Filter bids
+      filteredBids = allBids.filter(bid => {
+        const item = itemDetails[bid.item_id];
+        if (!item) return false;
+        
+        // Search filter
+        const matchesSearch = !searchTerm || 
+          item.name.toLowerCase().includes(searchTerm) || 
+          item.description.toLowerCase().includes(searchTerm);
+        
+        return matchesSearch;
+      });
+      
+      // Sort bids
+      switch (sortFilter) {
+        case 'newest':
+          filteredBids.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+          break;
+        case 'oldest':
+          filteredBids.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+          break;
+        case 'amount_low':
+          filteredBids.sort((a, b) => a.bid_amount - b.bid_amount);
+          break;
+        case 'amount_high':
+          filteredBids.sort((a, b) => b.bid_amount - a.bid_amount);
+          break;
+      }
+      
+      // Render bids
+      renderBids();
+    }
+    
+    // Render bids
+    function renderBids() {
+      const loader = document.getElementById('loader');
+      const bidsTableContainer = document.getElementById('bids-table-container');
+      const bidsTableBody = document.getElementById('bids-table-body');
+      const noBids = document.getElementById('no-bids');
+      
+      // Hide loader
+      loader.style.display = 'none';
+      
+      if (filteredBids.length === 0) {
+        // No bids found
+        bidsTableContainer.style.display = 'none';
+        noBids.style.display = 'block';
+      } else {
+        // Render bids
+        bidsTableBody.innerHTML = '';
+        
+        filteredBids.forEach(bid => {
+          const item = itemDetails[bid.item_id];
+          if (!item) return;
+          
+          // Determine bid status
+          let status = 'Pending';
+          let statusClass = 'badge-primary';
+          
+          if (item.status === 'sold') {
+            if (item.highest_bid && item.highest_bid.bid_id === bid.bid_id) {
+              status = 'Won';
+              statusClass = 'badge-success';
+            } else {
+              status = 'Lost';
+              statusClass = 'badge-danger';
+            }
+          } else if (item.highest_bid && item.highest_bid.bid_id === bid.bid_id) {
+            status = 'Highest Bid';
+            statusClass = 'badge-success';
+          } else if (item.highest_bid && item.highest_bid.bid_amount > bid.bid_amount) {
+            status = 'Outbid';
+            statusClass = 'badge-warning';
+          }
+          
+          // Create bid row
+          const bidRow = document.createElement('tr');
+          bidRow.style.borderBottom = '1px solid #eee';
+          
+          bidRow.innerHTML = `
+            <td style="padding: 0.75rem;">
+              <div style="display: flex; align-items: center;">
+                <div style="width: 50px; height: 50px; background-color: #f0f0f0; border-radius: var(--border-radius); overflow: hidden; margin-right: 1rem;">
+                  ${item.image_url 
+                    ? `<img src="http://localhost:8000${item.image_url}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.onerror=null; this.src='https://via.placeholder.com/50?text=No+Image';">`
+                    : `<div style="color: #aaa; text-align: center; font-size: 0.75rem; height: 100%; display: flex; align-items: center; justify-content: center;">No image</div>`
+                  }
+                </div>
+                <div>
+                  <p style="margin: 0; font-weight: 500;">${item.name}</p>
+                  <p style="margin: 0; font-size: 0.875rem; color: #666;">
+                    ${window.utils.getCategoryLabel(item.category)} | 
+                    ${window.utils.getConditionLabel(item.condition)}
+                  </p>
+                </div>
+              </div>
+            </td>
+            <td style="text-align: right; padding: 0.75rem; font-weight: 500;">${window.utils.formatCurrency(bid.bid_amount)}</td>
+            <td style="text-align: right; padding: 0.75rem;">${window.utils.formatDateTime(bid.created_at)}</td>
+            <td style="text-align: right; padding: 0.75rem;">
+              <span class="badge ${statusClass}">${status}</span>
+            </td>
+            <td style="text-align: right; padding: 0.75rem;">
+              <button class="btn btn-sm" onclick="viewItem(${item.item_id})">View</button>
+            </td>
+          `;
+          
+          bidsTableBody.appendChild(bidRow);
+        });
+        
+        bidsTableContainer.style.display = 'block';
+        noBids.style.display = 'none';
+      }
+    }
+    
+    // View item
+    function viewItem(itemId) {
+      window.location.href = `/pages/item-detail.html?id=${itemId}`;
+    }
+    
+    // Event listeners
+    document.getElementById('search-input').addEventListener('input', applyFilters);
+    document.getElementById('sort-filter').addEventListener('change', applyFilters);
+    
+    // Load bids on page load
+    loadBids();
+  </script>
+</body>
+</html>

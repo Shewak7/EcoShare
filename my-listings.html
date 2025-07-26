@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Listings - Recyclable Items Marketplace</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-container">
+      <a href="/" class="logo">
+        <i class="fas fa-recycle"></i>
+        EcoMarket
+      </a>
+      
+      <button class="mobile-menu-btn" id="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+      </button>
+      
+      <ul class="nav-menu" id="nav-menu">
+        <li class="nav-item">
+          <a href="/" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="/pages/buy-items.html" class="nav-link">Browse Items</a>
+        </li>
+        <li class="nav-item" id="user-dropdown">
+          <a href="#" class="nav-link">
+            <i class="fas fa-user"></i>
+            <span id="user-name">User</span>
+          </a>
+        </li>
+        <li class="nav-item" id="logout-btn">
+          <a href="#" class="nav-link" onclick="window.auth.logout(); return false;">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <ul class="sidebar-menu">
+      <li class="sidebar-item">
+        <a href="/pages/dashboard.html" class="sidebar-link">
+          <i class="fas fa-tachometer-alt"></i> Dashboard
+        </a>
+      </li>
+      <li class="sidebar-item">
+        <a href="/pages/buy-items.html" class="sidebar-link">
+          <i class="fas fa-shopping-cart"></i> Browse Items
+        </a>
+      </li>
+      <li class="sidebar-item">
+        <a href="/pages/sell-item.html" class="sidebar-link">
+          <i class="fas fa-tag"></i> Sell an Item
+        </a>
+      </li>
+      <li class="sidebar-item">
+        <a href="/pages/my-listings.html" class="sidebar-link active">
+          <i class="fas fa-list"></i> My Listings
+        </a>
+      </li>
+      <li class="sidebar-item">
+        <a href="/pages/my-bids.html" class="sidebar-link">
+          <i class="fas fa-gavel"></i> My Bids
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Sidebar Overlay -->
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <!-- Main Content -->
+  <main class="dashboard-content" id="dashboard-content">
+    <div class="container">
+      <h1>My Listings</h1>
+      <p>Manage your recyclable items for sale</p>
+      
+      <div id="alert-container"></div>
+      
+      <!-- Filters -->
+      <div style="display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap;">
+        <div style="flex: 1; min-width: 200px;">
+          <input type="text" id="search-input" class="form-control" placeholder="Search your listings...">
+        </div>
+        
+        <div style="width: 200px;">
+          <select id="status-filter" class="form-control">
+            <option value="">All Status</option>
+            <option value="active">Active</option>
+            <option value="sold">Sold</option>
+          </select>
+        </div>
+        
+        <div style="width: 200px;">
+          <select id="sort-filter" class="form-control">
+            <option value="newest">Newest First</option>
+            <option value="oldest">Oldest First</option>
+            <option value="price_low">Price: Low to High</option>
+            <option value="price_high">Price: High to Low</option>
+          </select>
+        </div>
+      </div>
+      
+      <!-- Create Listing Button -->
+      <div style="margin-bottom: 2rem;">
+        <a href="/pages/sell-item.html" class="btn">
+          <i class="fas fa-plus"></i> Create New Listing
+        </a>
+      </div>
+      
+      <!-- Items Grid -->
+      <div id="items-container">
+        <div id="loader" class="loader-container">
+          <div class="loader"></div>
+        </div>
+        
+        <div id="items-grid" class="grid" style="display: none;"></div>
+        
+        <div id="no-items" class="text-center" style="display: none; padding: 3rem;">
+          <h3>No listings found</h3>
+          <p>You haven't created any listings yet.</p>
+          <a href="/pages/sell-item.html" class="btn">Create Your First Listing</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-container">
+      <div class="footer-section">
+        <h3>EcoMarket</h3>
+        <p>Buy and sell recyclable items to reduce waste and make money.</p>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul class="footer-links">
+          <li class="footer-link"><a href="/">Home</a></li>
+          <li class="footer-link"><a href="/pages/buy-items.html">Browse Items</a></li>
+          <li class="footer-link"><a href="/pages/sell-item.html">Sell an Item</a></li>
+          <li class="footer-link"><a href="/pages/my-listings.html">My Listings</a></li>
+          <li class="footer-link"><a href="/pages/my-bids.html">My Bids</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Contact Us</h3>
+        <ul class="footer-links">
+          <li class="footer-link"><a href="mailto:info@ecomarket.com">info@ecomarket.com</a></li>
+          <li class="footer-link"><a href="tel:+1234567890">+1 (234) 567-890</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2023 EcoMarket. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="/assets/js/auth.js"></script>
+  <script src="/assets/js/api.js"></script>
+  <script src="/assets/js/utils.js"></script>
+  <script>
+    // Check if user is logged in
+    window.auth.checkAuth(true);
+    
+    // Get user data
+    const user = window.auth.getUser();
+    
+    // Update UI with user data
+    document.getElementById('user-name').textContent = user.username;
+    
+    // Mobile menu toggle
+    document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+      document.getElementById('nav-menu').classList.toggle('active');
+    });
+    
+    // Sidebar toggle for mobile
+    document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+      document.getElementById('sidebar').classList.toggle('active');
+      document.getElementById('sidebar-overlay').classList.toggle('active');
+    });
+    
+    // Close sidebar when clicking overlay
+    document.getElementById('sidebar-overlay').addEventListener('click', function() {
+      document.getElementById('sidebar').classList.remove('active');
+      document.getElementById('sidebar-overlay').classList.remove('active');
+    });
+    
+    // Variables
+    let allItems = [];
+    let filteredItems = [];
+    
+    // Load items
+    async function loadItems() {
+      const loader = document.getElementById('loader');
+      const itemsGrid = document.getElementById('items-grid');
+      const noItems = document.getElementById('no-items');
+      
+      try {
+        // Show loader
+        loader.style.display = 'flex';
+        itemsGrid.style.display = 'none';
+        noItems.style.display = 'none';
+        
+        // Get user's items
+        allItems = await window.api.item.getUserItems(user.user_id);
+        
+        // Apply filters
+        applyFilters();
+      } catch (error) {
+        console.error('Error loading items:', error);
+        window.utils.showAlert(error.message || 'Failed to load your listings. Please try again.', 'danger', '#alert-container');
+        
+        // Hide loader
+        loader.style.display = 'none';
+      }
+    }
+    
+    // Apply filters
+    function applyFilters() {
+      const searchTerm = document.getElementById('search-input').value.toLowerCase();
+      const statusFilter = document.getElementById('status-filter').value;
+      const sortFilter = document.getElementById('sort-filter').value;
+      
+      // Filter items
+      filteredItems = allItems.filter(item => {
+        // Search filter
+        const matchesSearch = !searchTerm || 
+          item.name.toLowerCase().includes(searchTerm) || 
+          item.description.toLowerCase().includes(searchTerm);
+        
+        // Status filter
+        const matchesStatus = !statusFilter || item.status === statusFilter;
+        
+        return matchesSearch && matchesStatus;
+      });
+      
+      // Sort items
+      switch (sortFilter) {
+        case 'newest':
+          filteredItems.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+          break;
+        case 'oldest':
+          filteredItems.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+          break;
+        case 'price_low':
+          filteredItems.sort((a, b) => a.starting_price - b.starting_price);
+          break;
+        case 'price_high':
+          filteredItems.sort((a, b) => b.starting_price - a.starting_price);
+          break;
+      }
+      
+      // Render items
+      renderItems();
+    }
+    
+    // Render items
+    function renderItems() {
+      const loader = document.getElementById('loader');
+      const itemsGrid = document.getElementById('items-grid');
+      const noItems = document.getElementById('no-items');
+      
+      // Hide loader
+      loader.style.display = 'none';
+      
+      if (filteredItems.length === 0) {
+        // No items found
+        itemsGrid.style.display = 'none';
+        noItems.style.display = 'block';
+      } else {
+        // Render items
+        itemsGrid.innerHTML = '';
+        
+        filteredItems.forEach(item => {
+          const itemCard = document.createElement('div');
+          itemCard.className = 'card item-card';
+          
+          // Get highest bid
+          const highestBid = item.highest_bid ? item.highest_bid.bid_amount : null;
+          
+          // Create item card HTML
+          itemCard.innerHTML = `
+            <div class="item-image">
+              ${item.image_url 
+                ? `<img src="http://localhost:8000${item.image_url}" alt="${item.name}" onerror="this.onerror=null; this.src='https://via.placeholder.com/150?text=No+Image';">`
+                : `<div style="color: #aaa;">No image available</div>`
+              }
+            </div>
+            <div class="item-body">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <h3 class="item-title">${item.name}</h3>
+                <span class="badge ${item.status === 'active' ? 'badge-success' : 'badge-warning'}">${item.status === 'active' ? 'Active' : 'Sold'}</span>
+              </div>
+              <div class="item-meta">
+                <span>Category: ${window.utils.getCategoryLabel(item.category)}</span>
+                <span>Condition: ${window.utils.getConditionLabel(item.condition)}</span>
+              </div>
+              <p style="height: 40px; overflow: hidden; text-overflow: ellipsis;">${item.description}</p>
+              <div class="item-price">
+                ${highestBid 
+                  ? `<span style="font-size: 0.875rem; color: #666;">Starting at </span>${window.utils.formatCurrency(item.starting_price)}<br>
+                     <span style="font-size: 0.875rem; color: #666;">Current bid </span>${window.utils.formatCurrency(highestBid)}`
+                  : `<span style="font-size: 0.875rem; color: #666;">Starting at </span>${window.utils.formatCurrency(item.starting_price)}`
+                }
+              </div>
+              <div style="margin-top: 0.5rem;">
+                <span style="font-size: 0.875rem; color: #666;">
+                  <i class="fas fa-gavel"></i> ${item.bid_count} bid${item.bid_count !== 1 ? 's' : ''}
+                </span>
+              </div>
+            </div>
+            <div class="item-footer">
+              <button class="btn w-100" onclick="viewItem(${item.item_id})">View Details</button>
+            </div>
+          `;
+          
+          itemsGrid.appendChild(itemCard);
+        });
+        
+        itemsGrid.style.display = 'grid';
+        noItems.style.display = 'none';
+      }
+    }
+    
+    // View item
+    function viewItem(itemId) {
+      window.location.href = `/pages/item-detail.html?id=${itemId}`;
+    }
+    
+    // Event listeners
+    document.getElementById('search-input').addEventListener('input', applyFilters);
+    document.getElementById('status-filter').addEventListener('change', applyFilters);
+    document.getElementById('sort-filter').addEventListener('change', applyFilters);
+    
+    // Load items on page load
+    loadItems();
+  </script>
+</body>
+</html>

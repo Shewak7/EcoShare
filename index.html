@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recyclable Items Marketplace</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-container">
+      <a href="/" class="logo">
+        <i class="fas fa-recycle"></i>
+        EcoMarket
+      </a>
+      
+      <button class="mobile-menu-btn" id="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+      </button>
+      
+      <ul class="nav-menu" id="nav-menu">
+        <li class="nav-item">
+          <a href="/" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="/pages/buy-items.html" class="nav-link">Browse Items</a>
+        </li>
+        <li class="nav-item" id="login-btn">
+          <a href="/pages/login.html" class="nav-link">Login</a>
+        </li>
+        <li class="nav-item" id="register-btn">
+          <a href="/pages/register.html" class="nav-link">Register</a>
+        </li>
+        <li class="nav-item" id="user-dropdown" style="display: none;">
+          <a href="/pages/dashboard.html" class="nav-link">
+            <i class="fas fa-user"></i>
+            <span id="user-name">User</span>
+          </a>
+        </li>
+        <li class="nav-item" id="logout-btn" style="display: none;">
+          <a href="#" class="nav-link" onclick="window.auth.logout(); return false;">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" style="background-color: var(--primary-color); color: white; padding: 4rem 0; text-align: center;">
+    <div class="container">
+      <h1 style="font-size: 3rem; margin-bottom: 1.5rem;">Buy and Sell Recyclable Items</h1>
+      <p style="font-size: 1.25rem; margin-bottom: 2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+        Join our community of eco-conscious individuals and businesses to buy and sell recyclable materials. 
+        Help reduce waste and make money while saving the planet.
+      </p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="/pages/register.html" class="btn" style="background-color: white; color: var(--primary-color); font-weight: bold; padding: 1rem 2rem;">
+          Get Started
+        </a>
+        <a href="/pages/buy-items.html" class="btn btn-outline" style="border-color: white; color: white; padding: 1rem 2rem;">
+          Browse Items
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features" style="padding: 4rem 0; background-color: #f5f5f5;">
+    <div class="container">
+      <h2 class="text-center" style="margin-bottom: 3rem;">How It Works</h2>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+        <!-- Feature 1 -->
+        <div class="card" style="text-align: center; padding: 2rem;">
+          <div style="font-size: 3rem; color: var(--primary-color); margin-bottom: 1rem;">
+            <i class="fas fa-box-open"></i>
+          </div>
+          <h3>List Your Items</h3>
+          <p>
+            Take photos and create listings for your recyclable materials. 
+            Set your starting price and wait for bids.
+          </p>
+        </div>
+        
+        <!-- Feature 2 -->
+        <div class="card" style="text-align: center; padding: 2rem;">
+          <div style="font-size: 3rem; color: var(--primary-color); margin-bottom: 1rem;">
+            <i class="fas fa-gavel"></i>
+          </div>
+          <h3>Receive Bids</h3>
+          <p>
+            Buyers will place bids on your items. 
+            Accept the best offer when you're ready to sell.
+          </p>
+        </div>
+        
+        <!-- Feature 3 -->
+        <div class="card" style="text-align: center; padding: 2rem;">
+          <div style="font-size: 3rem; color: var(--primary-color); margin-bottom: 1rem;">
+            <i class="fas fa-exchange-alt"></i>
+          </div>
+          <h3>Complete the Sale</h3>
+          <p>
+            Coordinate with the buyer for pickup or delivery. 
+            Help reduce waste while earning money.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories Section -->
+  <section class="categories" style="padding: 4rem 0;">
+    <div class="container">
+      <h2 class="text-center" style="margin-bottom: 3rem;">Browse by Category</h2>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+        <!-- Category 1 -->
+        <a href="/pages/buy-items.html?category=paper" class="card" style="text-align: center; padding: 1.5rem; text-decoration: none; color: inherit;">
+          <div style="font-size: 2.5rem; color: #8D6E63; margin-bottom: 1rem;">
+            <i class="fas fa-newspaper"></i>
+          </div>
+          <h3>Paper & Cardboard</h3>
+        </a>
+        
+        <!-- Category 2 -->
+        <a href="/pages/buy-items.html?category=plastic" class="card" style="text-align: center; padding: 1.5rem; text-decoration: none; color: inherit;">
+          <div style="font-size: 2.5rem; color: #42A5F5; margin-bottom: 1rem;">
+            <i class="fas fa-wine-bottle"></i>
+          </div>
+          <h3>Plastic</h3>
+        </a>
+        
+        <!-- Category 3 -->
+        <a href="/pages/buy-items.html?category=metal" class="card" style="text-align: center; padding: 1.5rem; text-decoration: none; color: inherit;">
+          <div style="font-size: 2.5rem; color: #78909C; margin-bottom: 1rem;">
+            <i class="fas fa-cog"></i>
+          </div>
+          <h3>Metal</h3>
+        </a>
+        
+        <!-- Category 4 -->
+        <a href="/pages/buy-items.html?category=glass" class="card" style="text-align: center; padding: 1.5rem; text-decoration: none; color: inherit;">
+          <div style="font-size: 2.5rem; color: #26A69A; margin-bottom: 1rem;">
+            <i class="fas fa-glass-martini-alt"></i>
+          </div>
+          <h3>Glass</h3>
+        </a>
+        
+        <!-- Category 5 -->
+        <a href="/pages/buy-items.html?category=electronics" class="card" style="text-align: center; padding: 1.5rem; text-decoration: none; color: inherit;">
+          <div style="font-size: 2.5rem; color: #EC407A; margin-bottom: 1rem;">
+            <i class="fas fa-laptop"></i>
+          </div>
+          <h3>Electronics</h3>
+        </a>
+        
+        <!-- Category 6 -->
+        <a href="/pages/buy-items.html?category=other" class="card" style="text-align: center; padding: 1.5rem; text-decoration: none; color: inherit;">
+          <div style="font-size: 2.5rem; color: #7E57C2; margin-bottom: 1rem;">
+            <i class="fas fa-boxes"></i>
+          </div>
+          <h3>Other</h3>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta" style="background-color: var(--primary-dark); color: white; padding: 4rem 0; text-align: center;">
+    <div class="container">
+      <h2 style="margin-bottom: 1.5rem;">Ready to Start Recycling?</h2>
+      <p style="font-size: 1.25rem; margin-bottom: 2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+        Join our community today and start buying and selling recyclable items. 
+        It's free to sign up and easy to get started.
+      </p>
+      <a href="/pages/register.html" class="btn" style="background-color: white; color: var(--primary-dark); font-weight: bold; padding: 1rem 2rem;">
+        Create an Account
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-container">
+      <div class="footer-section">
+        <h3>EcoMarket</h3>
+        <p>Buy and sell recyclable items to reduce waste and make money.</p>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul class="footer-links">
+          <li class="footer-link"><a href="/">Home</a></li>
+          <li class="footer-link"><a href="/pages/buy-items.html">Browse Items</a></li>
+          <li class="footer-link"><a href="/pages/login.html">Login</a></li>
+          <li class="footer-link"><a href="/pages/register.html">Register</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Categories</h3>
+        <ul class="footer-links">
+          <li class="footer-link"><a href="/pages/buy-items.html?category=paper">Paper & Cardboard</a></li>
+          <li class="footer-link"><a href="/pages/buy-items.html?category=plastic">Plastic</a></li>
+          <li class="footer-link"><a href="/pages/buy-items.html?category=metal">Metal</a></li>
+          <li class="footer-link"><a href="/pages/buy-items.html?category=glass">Glass</a></li>
+          <li class="footer-link"><a href="/pages/buy-items.html?category=electronics">Electronics</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Contact Us</h3>
+        <ul class="footer-links">
+          <li class="footer-link"><a href="mailto:info@ecomarket.com">info@ecomarket.com</a></li>
+          <li class="footer-link"><a href="tel:+1234567890">+1 (234) 567-890</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2023 EcoMarket. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="/assets/js/auth.js"></script>
+  <script src="/assets/js/api.js"></script>
+  <script src="/assets/js/utils.js"></script>
+  <script>
+    // Mobile menu toggle
+    document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+      document.getElementById('nav-menu').classList.toggle('active');
+    });
+    
+    // Update auth UI
+    window.auth.updateAuthUI();
+  </script>
+</body>
+</html>

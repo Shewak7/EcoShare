@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Item Details - Recyclable Items Marketplace</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-container">
+      <a href="/" class="logo">
+        <i class="fas fa-recycle"></i>
+        EcoMarket
+      </a>
+      
+      <button class="mobile-menu-btn" id="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+      </button>
+      
+      <ul class="nav-menu" id="nav-menu">
+        <li class="nav-item">
+          <a href="/" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="/pages/buy-items.html" class="nav-link">Browse Items</a>
+        </li>
+        <li class="nav-item" id="user-dropdown">
+          <a href="#" class="nav-link">
+            <i class="fas fa-user"></i>
+            <span id="user-name">User</span>
+          </a>
+        </li>
+        <li class="nav-item" id="logout-btn">
+          <a href="#" class="nav-link" onclick="window.auth.logout(); return false;">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <ul class="sidebar-menu">
+      <li class="sidebar-item">
+        <a href="/pages/dashboard.html" class="sidebar-link">
+          <i class="fas fa-tachometer-alt"></i> Dashboard
+        </a>
+      </li>
+      <li class="sidebar-item">
+        <a href="/pages/buy-items.html" class="sidebar-link">
+          <i class="fas fa-shopping-cart"></i> Browse Items
+        </a>
+      </li>
+      <li class="sidebar-item">
+        <a href="/pages/sell-item.html" class="sidebar-link">
+          <i class="fas fa-tag"></i> Sell an Item
+        </a>
+      </li>
+      <li class="sidebar-item">
+        <a href="/pages/my-listings.html" class="sidebar-link">
+          <i class="fas fa-list"></i> My Listings
+        </a>
+      </li>
+      <li class="sidebar-item">
+        <a href="/pages/my-bids.html" class="sidebar-link">
+          <i class="fas fa-gavel"></i> My Bids
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Sidebar Overlay -->
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <!-- Main Content -->
+  <main class="dashboard-content" id="dashboard-content">
+    <div class="container">
+      <div id="alert-container"></div>
+      
+      <div id="loader" class="loader-container">
+        <div class="loader"></div>
+      </div>
+      
+      <div id="item-details" style="display: none;">
+        <!-- Item details will be loaded here -->
+      </div>
+      
+      <!-- Bid Modal -->
+      <div id="bid-modal" class="modal-overlay" style="display: none;">
+        <div class="modal">
+          <div class="modal-header">
+            <h3 class="modal-title">Place a Bid</h3>
+            <button class="modal-close" id="close-bid-modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <form id="bid-form">
+              <div class="form-group">
+                <label for="bid-amount">Bid Amount ($)</label>
+                <input type="number" id="bid-amount" name="bid-amount" class="form-control" step="0.01" min="0.01" required>
+                <small id="min-bid-info" class="text-secondary">Minimum bid: $0.00</small>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-outline" id="cancel-bid">Cancel</button>
+            <button class="btn" id="submit-bid">Place Bid</button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Accept Bid Modal -->
+      <div id="accept-bid-modal" class="modal-overlay" style="display: none;">
+        <div class="modal">
+          <div class="modal-header">
+            <h3 class="modal-title">Accept Bid</h3>
+            <button class="modal-close" id="close-accept-modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure you want to accept this bid? This will mark the item as sold and notify the buyer.</p>
+            <div id="accept-bid-details"></div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-outline" id="cancel-accept">Cancel</button>
+            <button class="btn" id="confirm-accept">Accept Bid</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-container">
+      <div class="footer-section">
+        <h3>EcoMarket</h3>
+        <p>Buy and sell recyclable items to reduce waste and make money.</p>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul class="footer-links">
+          <li class="footer-link"><a href="/">Home</a></li>
+          <li class="footer-link"><a href="/pages/buy-items.html">Browse Items</a></li>
+          <li class="footer-link"><a href="/pages/sell-item.html">Sell an Item</a></li>
+          <li class="footer-link"><a href="/pages/my-listings.html">My Listings</a></li>
+          <li class="footer-link"><a href="/pages/my-bids.html">My Bids</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Contact Us</h3>
+        <ul class="footer-links">
+          <li class="footer-link"><a href="mailto:info@ecomarket.com">info@ecomarket.com</a></li>
+          <li class="footer-link"><a href="tel:+1234567890">+1 (234) 567-890</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2023 EcoMarket. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="/assets/js/auth.js"></script>
+  <script src="/assets/js/api.js"></script>
+  <script src="/assets/js/utils.js"></script>
+  <script>
+    // Check if user is logged in
+    window.auth.checkAuth(true);
+    
+    // Get user data
+    const user = window.auth.getUser();
+    
+    // Update UI with user data
+    document.getElementById('user-name').textContent = user.username;
+    
+    // Mobile menu toggle
+    document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+      document.getElementById('nav-menu').classList.toggle('active');
+    });
+    
+    // Sidebar toggle for mobile
+    document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+      document.getElementById('sidebar').classList.toggle('active');
+      document.getElementById('sidebar-overlay').classList.toggle('active');
+    });
+    
+    // Close sidebar when clicking overlay
+    document.getElementById('sidebar-overlay').addEventListener('click', function() {
+      document.getElementById('sidebar').classList.remove('active');
+      document.getElementById('sidebar-overlay').classList.remove('active');
+    });
+    
+    // Variables
+    let currentItem = null;
+    let itemBids = [];
+    let selectedBidId = null;
+    
+    // Get item ID from URL
+    const urlParams = window.utils.getUrlParams();
+    const itemId = urlParams.id;
+    
+    if (!itemId) {
+      window.location.href = '/pages/buy-items.html';
+    }
+    
+    // Load item details
+    async function loadItemDetails() {
+      const loader = document.getElementById('loader');
+      const itemDetails = document.getElementById('item-details');
+      
+      try {
+        // Show loader
+        loader.style.display = 'flex';
+        itemDetails.style.display = 'none';
+        
+        // Get item details
+        currentItem = await window.api.item.getItemById(itemId);
+        
+        // Get item bids
+        try {
+          itemBids = await window.api.bid.getItemBids(itemId);
+        } catch (error) {
+          console.error('Error fetching bids:', error);
+          itemBids = [];
+        }
+        
+        // Render item details
+        renderItemDetails();
+      } catch (error) {
+        console.error('Error loading item details:', error);
+        window.utils.showAlert(error.message || 'Failed to load item details. Please try again.', 'danger', '#alert-container');
+        
+        // Hide loader
+        loader.style.display = 'none';
+      }
+    }
+    
+    // Render item details
+    function renderItemDetails() {
+      const loader = document.getElementById('loader');
+      const itemDetails = document.getElementById('item-details');
+      
+      // Hide loader
+      loader.style.display = 'none';
+      
+      // Check if item exists
+      if (!currentItem) {
+        itemDetails.innerHTML = `
+          <div class="alert alert-danger">
+            Item not found. It may have been removed or sold.
+          </div>
+          <a href="/pages/buy-items.html" class="btn">Browse Other Items</a>
+        `;
+        itemDetails.style.display = 'block';
+        return;
+      }
+      
+      // Check if user is the seller
+      const isUserSeller = currentItem.seller_id === user.user_id;
+      
+      // Get highest bid
+      const highestBid = currentItem.highest_bid;
+      
+      // Create item details HTML
+      let html = `
+        <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+          <a href="/pages/buy-items.html" class="btn btn-sm btn-outline" style="margin-right: 1rem;">
+            <i class="fas fa-arrow-left"></i> Back to Items
+          </a>
+          <h1 style="margin: 0;">${currentItem.name}</h1>
+        </div>
+        
+        <div class="card" style="margin-bottom: 2rem;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+            <div>
+              <div style="background-color: #f0f0f0; border-radius: var(--border-radius); height: 300px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                ${currentItem.image_url 
+                  ? `<img src="http://localhost:8000${currentItem.image_url}" alt="${currentItem.name}" style="max-width: 100%; max-height: 100%; object-fit: contain;" onerror="this.onerror=null; this.src='https://via.placeholder.com/300?text=No+Image';">`
+                  : `<div style="color: #aaa; text-align: center;">No image available</div>`
+                }
+              </div>
+            </div>
+            
+            <div>
+              <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                <div>
+                  <span class="badge badge-primary" style="margin-right: 0.5rem;">${window.utils.getCategoryLabel(currentItem.category)}</span>
+                  <span class="badge ${currentItem.status === 'active' ? 'badge-success' : 'badge-warning'}">${currentItem.status === 'active' ? 'Active' : 'Sold'}</span>
+                </div>
+                <div>
+                  <span style="color: #666;">Listed ${window.utils.formatDate(currentItem.created_at)}</span>
+                </div>
+              </div>
+              
+              <div style="margin-bottom: 1rem;">
+                <p style="margin: 0; color: #666;">Condition</p>
+                <p style="margin: 0; font-weight: 500;">${window.utils.getConditionLabel(currentItem.condition)}</p>
+              </div>
+              
+              <div style="margin-bottom: 1rem;">
+                <p style="margin: 0; color: #666;">Seller</p>
+                <p style="margin: 0; font-weight: 500;">${currentItem.seller_name}</p>
+              </div>
+              
+              <div style="margin-bottom: 1rem;">
+                <p style="margin: 0; color: #666;">Starting Price</p>
+                <p style="margin: 0; font-size: 1.5rem; font-weight: 700; color: var(--primary-color);">${window.utils.formatCurrency(currentItem.starting_price)}</p>
+              </div>
+              
+              ${highestBid ? `
+                <div style="margin-bottom: 1rem;">
+                  <p style="margin: 0; color: #666;">Current Highest Bid</p>
+                  <p style="margin: 0; font-size: 1.5rem; font-weight: 700; color: var(--accent-color);">${window.utils.formatCurrency(highestBid.bid_amount)}</p>
+                  <p style="margin: 0; color: #666;">by ${highestBid.bidder_name} on ${window.utils.formatDateTime(highestBid.created_at)}</p>
+                </div>
+              ` : ''}
+              
+              <div style="margin-bottom: 1rem;">
+                <p style="margin: 0; color: #666;">Total Bids</p>
+                <p style="margin: 0; font-weight: 500;">${currentItem.bid_count}</p>
+              </div>
+              
+              ${currentItem.status === 'active' && !isUserSeller ? `
+                <button class="btn w-100" id="place-bid-btn">
+                  <i class="fas fa-gavel"></i> Place Bid
+                </button>
+              ` : ''}
+              
+              ${currentItem.status === 'active' && isUserSeller && highestBid ? `
+                <button class="btn w-100" id="accept-bid-btn">
+                  <i class="fas fa-check"></i> Accept Highest Bid
+                </button>
+              ` : ''}
+              
+              ${currentItem.status === 'sold' ? `
+                <div class="alert alert-warning">
+                  This item has been sold.
+                </div>
+              ` : ''}
+            </div>
+          </div>
+        </div>
+        
+        <div class="card">
+          <h2>Item Description</h2>
+          <p>${currentItem.description}</p>
+        </div>
+      `;
+      
+      // Add bids section if there are bids or user is the seller
+      if (currentItem.bid_count > 0 || isUserSeller) {
+        html += `
+          <div class="card" style="margin-top: 2rem;">
+            <h2>Bids</h2>
+            
+            ${itemBids.length === 0 ? `
+              <p>No bids have been placed on this item yet.</p>
+            ` : `
+              <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                  <tr style="border-bottom: 1px solid #eee;">
+                    <th style="text-align: left; padding: 0.75rem;">Bidder</th>
+                    <th style="text-align: right; padding: 0.75rem;">Amount</th>
+                    <th style="text-align: right; padding: 0.75rem;">Date</th>
+                    ${isUserSeller ? '<th style="text-align: right; padding: 0.75rem;">Action</th>' : ''}
+                  </tr>
+                </thead>
+                <tbody>
+                  ${itemBids.map(bid => `
+                    <tr style="border-bottom: 1px solid #eee;">
+                      <td style="padding: 0.75rem;">${bid.bidder_name}</td>
+                      <td style="text-align: right; padding: 0.75rem; font-weight: 500;">${window.utils.formatCurrency(bid.bid_amount)}</td>
+                      <td style="text-align: right; padding: 0.75rem;">${window.utils.formatDateTime(bid.created_at)}</td>
+                      ${isUserSeller ? `
+                        <td style="text-align: right; padding: 0.75rem;">
+                          <button class="btn btn-sm" onclick="acceptBid(${bid.bid_id})">Accept</button>
+                        </td>
+                      ` : ''}
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            `}
+          </div>
+        `;
+      }
+      
+      // Set item details HTML
+      itemDetails.innerHTML = html;
+      itemDetails.style.display = 'block';
+      
+      // Add event listeners
+      const placeBidBtn = document.getElementById('place-bid-btn');
+      if (placeBidBtn) {
+        placeBidBtn.addEventListener('click', openBidModal);
+      }
+      
+      const acceptBidBtn = document.getElementById('accept-bid-btn');
+      if (acceptBidBtn) {
+        acceptBidBtn.addEventListener('click', () => {
+          if (highestBid) {
+            acceptBid(highestBid.bid_id);
+          }
+        });
+      }
+    }
+    
+    // Open bid modal
+    function openBidModal() {
+      const bidModal = document.getElementById('bid-modal');
+      const bidAmount = document.getElementById('bid-amount');
+      const minBidInfo = document.getElementById('min-bid-info');
+      
+      // Set minimum bid amount
+      let minBid = currentItem.starting_price;
+      if (currentItem.highest_bid) {
+        minBid = currentItem.highest_bid.bid_amount + 0.01;
+      }
+      
+      // Update min bid info
+      minBidInfo.textContent = `Minimum bid: ${window.utils.formatCurrency(minBid)}`;
+      
+      // Set default bid amount
+      bidAmount.min = minBid;
+      bidAmount.value = minBid;
+      
+      // Show modal
+      bidModal.style.display = 'flex';
+    }
+    
+    // Close bid modal
+    function closeBidModal() {
+      const bidModal = document.getElementById('bid-modal');
+      bidModal.style.display = 'none';
+    }
+    
+    // Submit bid
+    async function submitBid() {
+      const bidAmount = parseFloat(document.getElementById('bid-amount').value);
+      
+      // Validate bid amount
+      let minBid = currentItem.starting_price;
+      if (currentItem.highest_bid) {
+        minBid = currentItem.highest_bid.bid_amount + 0.01;
+      }
+      
+      if (isNaN(bidAmount) || bidAmount < minBid) {
+        window.utils.showAlert(`Bid amount must be at least ${window.utils.formatCurrency(minBid)}`, 'danger', '#alert-container');
+        return;
+      }
+      
+      // Disable submit button
+      const submitBtn = document.getElementById('submit-bid');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Placing Bid...';
+      
+      try {
+        // Place bid
+        const response = await window.api.bid.createBid({
+          item_id: currentItem.item_id,
+          bid_amount: bidAmount
+        });
+        
+        // Close modal
+        closeBidModal();
+        
+        // Show success message
+        window.utils.showAlert('Bid placed successfully!', 'success', '#alert-container');
+        
+        // Reload item details
+        await loadItemDetails();
+      } catch (error) {
+        console.error('Error placing bid:', error);
+        window.utils.showAlert(error.message || 'Failed to place bid. Please try again.', 'danger', '#alert-container');
+      } finally {
+        // Re-enable submit button
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Place Bid';
+      }
+    }
+    
+    // Accept bid
+    function acceptBid(bidId) {
+      const acceptBidModal = document.getElementById('accept-bid-modal');
+      const acceptBidDetails = document.getElementById('accept-bid-details');
+      
+      // Find bid
+      const bid = itemBids.find(b => b.bid_id === bidId);
+      if (!bid) {
+        window.utils.showAlert('Bid not found.', 'danger', '#alert-container');
+        return;
+      }
+      
+      // Set selected bid ID
+      selectedBidId = bidId;
+      
+      // Update accept bid details
+      acceptBidDetails.innerHTML = `
+        <div style="margin-top: 1rem; padding: 1rem; background-color: #f9f9f9; border-radius: var(--border-radius);">
+          <p style="margin: 0; font-weight: 500;">Bid Amount: ${window.utils.formatCurrency(bid.bid_amount)}</p>
+          <p style="margin: 0;">Bidder: ${bid.bidder_name}</p>
+          <p style="margin: 0;">Date: ${window.utils.formatDateTime(bid.created_at)}</p>
+        </div>
+      `;
+      
+      // Show modal
+      acceptBidModal.style.display = 'flex';
+    }
+    
+    // Close accept bid modal
+    function closeAcceptBidModal() {
+      const acceptBidModal = document.getElementById('accept-bid-modal');
+      acceptBidModal.style.display = 'none';
+      selectedBidId = null;
+    }
+    
+    // Confirm accept bid
+    async function confirmAcceptBid() {
+      if (!selectedBidId) {
+        closeAcceptBidModal();
+        return;
+      }
+      
+      // Disable confirm button
+      const confirmBtn = document.getElementById('confirm-accept');
+      confirmBtn.disabled = true;
+      confirmBtn.textContent = 'Accepting...';
+      
+      try {
+        // Accept bid
+        const response = await window.api.item.acceptBid(currentItem.item_id, selectedBidId);
+        
+        // Close modal
+        closeAcceptBidModal();
+        
+        // Show success message
+        window.utils.showAlert('Bid accepted successfully! The item is now marked as sold.', 'success', '#alert-container');
+        
+        // Reload item details
+        await loadItemDetails();
+      } catch (error) {
+        console.error('Error accepting bid:', error);
+        window.utils.showAlert(error.message || 'Failed to accept bid. Please try again.', 'danger', '#alert-container');
+      } finally {
+        // Re-enable confirm button
+        confirmBtn.disabled = false;
+        confirmBtn.textContent = 'Accept Bid';
+      }
+    }
+    
+    // Event listeners for modals
+    document.getElementById('close-bid-modal').addEventListener('click', closeBidModal);
+    document.getElementById('cancel-bid').addEventListener('click', closeBidModal);
+    document.getElementById('submit-bid').addEventListener('click', submitBid);
+    
+    document.getElementById('close-accept-modal').addEventListener('click', closeAcceptBidModal);
+    document.getElementById('cancel-accept').addEventListener('click', closeAcceptBidModal);
+    document.getElementById('confirm-accept').addEventListener('click', confirmAcceptBid);
+    
+    // Load item details on page load
+    loadItemDetails();
+  </script>
+</body>
+</html>
